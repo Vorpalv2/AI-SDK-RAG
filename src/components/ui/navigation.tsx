@@ -18,7 +18,7 @@ export const Navigation = () => {
           <UserButton />
           {/* <UserAvatar /> */}
           <SignedOut>
-            <SignInButton forceRedirectUrl={"/chat"} mode="modal">
+            <SignInButton mode="modal">
               <Button variant="ghost">Sign In</Button>
             </SignInButton>
             <SignUpButton mode="modal">
@@ -27,7 +27,7 @@ export const Navigation = () => {
           </SignedOut>
 
           <SignedIn>
-            <SignOutButton redirectUrl="/signed-out">
+            <SignOutButton redirectUrl="/">
               <Button variant="outline">Sign Out</Button>
             </SignOutButton>
           </SignedIn>
