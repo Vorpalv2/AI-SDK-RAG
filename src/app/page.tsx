@@ -17,7 +17,7 @@ export default function Home() {
             {" "}
             Upload PDF
           </a>{" "}
-          to upload pdf. (Route only Accessable my Admin Accounts)
+          to upload pdf. (Route only Accessable to Admin Accounts)
         </p>
       </div>
     </div>
