@@ -28,10 +28,26 @@
 // };
 
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 
 const isPublicRoute = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)"]);
+const isAdminRoute = createRouteMatcher(["/upload"]);
 
 export default clerkMiddleware(async (auth, req) => {
+  const authentication = await auth();
+  const isAdmin =
+    authentication.sessionClaims?.metadata.role == "admin" ? "admin" : "user";
+  console.log(isAdmin);
+
+  if (isAdmin === "user" && isAdminRoute(req)) {
+    // await auth.protect();
+    console.log("Attempted access to admin route by non-admin:", req.url);
+    const url = new URL("/", req.url);
+    console.log(url);
+    return NextResponse.redirect(url);
+  }
+
   if (!isPublicRoute(req)) {
     await auth.protect();
   }
